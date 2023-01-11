@@ -42,6 +42,32 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+            <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <version>3.3.1</version>
+                <configuration>
+                    <to>
+                        <image>${project.artifactId}</image>
+
+                    </to>
+                    <from>
+                        <image>eclipse-temurin:17-jre</image>
+                    </from>
+                    <container>
+                        <jvmFlags>
+                            <jvmFlag>-Dspring.config.location=file:/var/conf/application.yml</jvmFlag>
+                        </jvmFlags>
+                        <ports>
+                            <port>8080</port>
+                        </ports>
+                        <volumes>
+                            <volume>/var/conf</volume>
+                        </volumes>
+                        <mainClass>com.janoz.ghcdci.Application</mainClass>
+                    </container>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
