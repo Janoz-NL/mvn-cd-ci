@@ -1,0 +1,5 @@
+###
+GET http://{{host}}:{{port}}/Gijs
+
+###
+GET http://{{host}}:{{port}}/
