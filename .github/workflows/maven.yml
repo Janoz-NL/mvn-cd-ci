@@ -23,7 +23,7 @@ jobs:
           distribution: 'temurin'
           cache: maven
       - name: Build image with Maven
-        run: mvn --batch-mode --update-snapshots jib:buildTar
+        run: mvn --batch-mode --update-snapshots verify jib:buildTar
       - run: mkdir staging && cp target/jib-image.* staging
       - uses: actions/upload-artifact@v3
         with:
