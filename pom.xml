@@ -10,7 +10,7 @@
 
     <groupId>com.janoz</groupId>
     <artifactId>ghcdci</artifactId>
-    <version>0.0.10-SNAPSHOT</version>
+    <version>0.0.11-SNAPSHOT</version>
     <name>ghcdci</name>
     <description>Demo project for Spring Boot</description>
 
