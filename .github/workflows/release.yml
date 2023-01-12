@@ -27,9 +27,21 @@ jobs:
       - name: Build release
         id: build_release
         run: |
-          mvn --batch-mode release:prepare && mvn release:perform -Darguments="-Dmaven.deploy.skip=true"
+          mvn help:evaluate -Dexpression=project.version -q -DforceStdout
+          mvn --batch-mode release:prepare
+
+          mvn help:evaluate -Dexpression=project.version -q -DforceStdout
+
+          mvn release:perform -Darguments="-Dmaven.deploy.skip=true"
+          mvn help:evaluate -Dexpression=project.version -q -DforceStdout
+
+          export
+          ls target
       - name: Stage release
-        run: mkdir staging && cp target/*-image.zip staging/mvn-cd-ci-${{ github.rev }}.zip
+        run: |
+          mkdir staging && cp target/*-image.zip staging/mvn-cd-ci-${{ github.rev }}.zip
+          ls target
+          ls staging
       - name: Create release
         id: create_release
         uses: actions/create-release@v1
