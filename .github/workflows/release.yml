@@ -30,15 +30,15 @@ jobs:
           mvn --batch-mode release:prepare && VERSION=`mvn help:evaluate -Dexpression=project.version -q -DforceStdout` && mvn release:perform -Darguments="-Dmaven.deploy.skip=true"
           echo "version=v$VERSION" >> $GITHUB_OUTPUT
       - name: Stage release
-        run: mkdir staging && cp target/*-image.zip staging/mvn-cd-ci-${{ steps.get_version.outputs.version }}.zip
+        run: mkdir staging && cp target/*-image.zip staging/mvn-cd-ci-${{ steps.build_release.outputs.version }}.zip
       - name: Create release
         id: create_release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ steps.get_version.outputs.version }}
-          release_name: Release ${{ steps.get_version.outputs.version }}
+          tag_name: ${{ steps.build_release.outputs.version }}
+          release_name: Release ${{ steps.build_release.outputs.version }}
           draft: false
           prerelease: false
       - name: Upload Release Asset
@@ -48,6 +48,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
-          asset_path: staging/mvn-cd-ci-${{ steps.get_version.outputs.version }}.zip
-          asset_name: mvn-cd-ci-${{ steps.get_version.outputs.version }}.zip
+          asset_path: staging/mvn-cd-ci-${{ steps.build_release.outputs.version }}.zip
+          asset_name: mvn-cd-ci-${{ steps.build_release.outputs.version }}.zip
           asset_content_type: application/zip
