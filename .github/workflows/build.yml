@@ -8,8 +8,11 @@
 
 name: Build
 
-on: [push]
-
+on:
+  push:
+    branches:
+      - '**'        # matches every branch
+      - '!master'   # excludes maste
 jobs:
   build:
     runs-on: ubuntu-latest
