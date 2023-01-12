@@ -27,7 +27,7 @@ jobs:
       - name: Build release
         id: build_release
         run: |
-          mvn --batch-mode release:prepare && VERSION=`mvn help:evaluate -Dexpression=project.version -q -DforceStdout` && mvn release:perform
+          mvn --batch-mode release:prepare && VERSION=`mvn help:evaluate -Dexpression=project.version -q -DforceStdout` && mvn release:perform -Darguments="-Dmaven.deploy.skip=true"
           echo "version=v$VERSION" >> $GITHUB_OUTPUT
       - name: Stage release
         run: mkdir staging && cp target/*-image.zip staging/mvn-cd-ci-${{ steps.get_version.outputs.version }}.zip
