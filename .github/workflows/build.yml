@@ -18,7 +18,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Check out project
+        uses: actions/checkout@v3
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
@@ -29,12 +30,11 @@ jobs:
         run: mvn --batch-mode --update-snapshots package
       - name: Get version
         id: get_version
-        run: |
-          VERSION=`mvn help:evaluate -Dexpression=project.version -q -DforceStdout`
-          echo "version=v$VERSION" >> $GITHUB_OUTPUT
-          cat $GITHUB_OUTPUT
-      - run: mkdir staging && cp target/*-image.zip staging
-      - uses: actions/upload-artifact@v3
+        run: echo version=`mvn help:evaluate -Dexpression=project.version -q -DforceStdout` >> $GITHUB_OUTPUT
+      - name: Stage image
+        run: mkdir staging && cp target/*-image.zip staging
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
         with:
           name: Release ${{ steps.get_version.outputs.version }}
           path: staging
