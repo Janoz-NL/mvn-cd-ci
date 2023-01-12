@@ -10,13 +10,14 @@
 
     <groupId>com.janoz</groupId>
     <artifactId>ghcdci</artifactId>
-    <version>0.0.2-SNAPSHOT</version>
+    <version>0.0.2</version>
     <name>ghcdci</name>
     <description>Demo project for Spring Boot</description>
 
     <scm>
         <connection>scm:git:https://github.com/Janoz-NL/mvn-cd-ci.git</connection>
         <developerConnection>scm:git:https://github.com/Janoz-NL/mvn-cd-ci.git</developerConnection>
+    <tag>v0.0.2</tag>
   </scm>
 
     <properties>
