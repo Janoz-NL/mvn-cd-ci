@@ -28,7 +28,7 @@ jobs:
         id: get_version
         run: |
           VERSION=`mvn help:evaluate -Dexpression=project.version -q -DforceStdout`
-          echo "name=version::v$VERSION" >> $GITHUB_OUTPUT
+          echo "version=v$VERSION" >> $GITHUB_OUTPUT
           export
       - run: mkdir staging && cp target/*-image.zip staging
       - uses: actions/upload-artifact@v3
