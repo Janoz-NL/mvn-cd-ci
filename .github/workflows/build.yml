@@ -10,9 +10,9 @@ name: Build
 
 on:
   push:
-    branches:
-      - '**'        # matches every branch
-      - '!master'   # excludes maste
+    branches-ignore:
+      - master
+
 jobs:
   build:
     runs-on: ubuntu-latest

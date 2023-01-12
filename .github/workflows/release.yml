@@ -5,8 +5,6 @@ on:
     branches:
       - release
 
-permissions: read-all|write-all
-
 jobs:
   build:
     runs-on: ubuntu-latest
