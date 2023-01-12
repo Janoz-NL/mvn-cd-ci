@@ -11,7 +11,7 @@ name: Build
 on:
   push:
     branches-ignore:
-      - master
+      - release
 
 jobs:
   build:
