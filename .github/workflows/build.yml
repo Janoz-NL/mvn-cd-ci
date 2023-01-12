@@ -28,9 +28,9 @@ jobs:
         id: get_version
         run: |
           VERSION=$( mvn help:evaluate -Dexpression=project.version -q -DforceStdout )
-          echo "::set-output name=version::v$VERSION"
+          echo "name=version::v$VERSION" >> $GITHUB_OUTPUT
       - run: mkdir staging && cp target/*-image.zip staging
       - uses: actions/upload-artifact@v3
         with:
-          name: Release ${{ steps.project.outputs.version }}
+          name: Release ${{ steps.get_version.outputs.version }}
           path: staging
